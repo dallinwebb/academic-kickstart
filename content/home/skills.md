@@ -19,18 +19,18 @@ weight = 7
   icon = "r-project"
   icon_pack = "fab"
   name = "R"
-  description = "90%"
-  
+  description = "Tidyverse"
+ 
+[[feature]]
+  icon = "chart-bar"
+  icon_pack = "fas"
+  name = "Data Visualization"
+  description = "ggplot2 | Power Bi"
+ 
 [[feature]]
   icon = "chart-line"
   icon_pack = "fas"
   name = "Statistics"
-  description = "100%"  
-  
-[[feature]]
-  icon = "camera-retro"
-  icon_pack = "fas"
-  name = "Photography"
-  description = "10%"
+  description = ""  
 
 +++
