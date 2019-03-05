@@ -51,8 +51,8 @@ time_format = "3:04 PM"
 
 # Enter contact details (optional). To hide a field, clear it to "".
 email = "webbdallin@gmail.com"
-phone = "435-671-5816"
-address = "Midway, UT"
+phone = ""
+address = "Salt Lake City, UT"
 
 # Office hours: use `<br>` to insert a line break, or set to "" to remove office hours
 #office_hours = """Monday 10:00 to 13:00<br>

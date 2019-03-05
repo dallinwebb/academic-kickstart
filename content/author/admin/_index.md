@@ -13,7 +13,7 @@ role = "Data Analyst Intern"
 organizations = [ { name = "BYU - Pathway Worldwide", url = "https://byupathway.lds.org/" } ]
 
 # Short bio (displayed in user profile at end of posts)
-bio = "insert short bio here"
+bio = "Aspiring Data Scientist"
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email = ""
