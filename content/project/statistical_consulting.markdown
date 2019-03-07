@@ -1,7 +1,7 @@
 ---
-title: "HSPSModelR Example Workflow"
+title: "Statistical Consulting: HSPSModelR R Package Workflow"
 author: "Brad Borget, Spencer Cook, Chad Schaeffer, Nic Stover, Dallin Webb"
-date: "2019-02-23"
+date: "2019-03-07"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Example workflow}

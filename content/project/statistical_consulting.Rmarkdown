@@ -1,5 +1,5 @@
 ---
-title: "HSPSModelR Example Workflow"
+title: "Statistical Consulting: HSPSModelR R Package Workflow"
 author: "Brad Borget, Spencer Cook, Chad Schaeffer, Nic Stover, Dallin Webb"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
