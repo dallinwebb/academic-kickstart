@@ -28,7 +28,7 @@ interests = [
 # List qualifications (such as academic degrees)
 [[education.courses]]
   course = "BS in Psychology; Minor in Data Science"
-  institution = "Brigham Young University Idaho"
+  institution = "Brigham Young University - Idaho"
   year = 2018
 
 # Social/Academic Networking
