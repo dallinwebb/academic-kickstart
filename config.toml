@@ -13,7 +13,7 @@ baseurl = "https://dallinwebb.me/"
 
 # Enter a copyright notice to display in the site footer.
 # To display a copyright symbol, type `&copy;`.
-copyright = ""
+copyright = "%copy; 2019"
 
 # Enable analytics by entering your Google Analytics tracking ID
 googleAnalytics = "UA-135658760-1"
