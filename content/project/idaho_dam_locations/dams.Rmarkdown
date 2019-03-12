@@ -1,0 +1,47 @@
+---
+title: "Idaho Dam Locations"
+date: "June 26, 2018"
+output:
+  html_document:  
+    keep_md: true
+    code_folding: hide
+    fig_height: 6
+    fig_width: 12
+    fig_align: 'center'
+---
+
+```{r}
+library(tidyverse)
+library(rio)
+library(sf)
+library(maps)
+library(USAboundaries)
+#library(albersusa)
+
+shp <- st_read("shp/County-AK-HI-Moved-USA-Map.shp")
+dam <- st_read("dam/dam.shp")
+well <- st_read("wells/wells.shp")
+water <- st_read("hyd250/hyd250.shp")
+
+idaho <- shp %>%
+  filter(StateName == "Idaho") %>% 
+  st_transform(crs = 2788)
+
+snake_henry <- water %>% 
+  filter(FEAT_NAME %in% c("Snake River","Henrys Fork"))
+
+well2 <- well %>% 
+  filter(Production > 5000)
+
+dam2 <- dam %>%
+  filter(SurfaceAre > 50)
+
+ggplot() + 
+  geom_sf(data = idaho, fill = "white", size = .5) + 
+  geom_sf(data = well2, col = "yellow", shape = 24, fill = "yellow") +
+  geom_sf(data = dam2, col = "firebrick", shape = 15, size = 2, alpha = .4) +
+  geom_sf(data = snake_henry, col = "blue", size = 1) +
+  coord_sf(datum = NA) +
+  theme_void()
+```
+

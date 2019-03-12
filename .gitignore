@@ -1,3 +1,14 @@
 public/
 .idea/
 .Rproj.user
+*.csv
+*.xlsx
+*.rds
+*.sav
+*.dta
+*.dbf
+*.zip
+.content/project/idaho_dam_locations/dam/
+.content/project/idaho_dam_locations/hyd250/
+.content/project/idaho_dam_locations/shp/
+.content/project/idaho_dam_locations/wells/
