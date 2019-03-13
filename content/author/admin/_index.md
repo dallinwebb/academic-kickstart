@@ -76,4 +76,4 @@ interests = [
 
 Dallin Webb is a Data Analyst Intern at BYU Pathway Worldwide. His interests include using tools such as SQL, Power BI, R and the tidyverse libraries to identify and understand problems and opportunities.
 
-His work currently includes cleaning data in R and developing Power BI dashboards for the many great teams at BYU Pathway Worlwide. In his free time, he learns statistics, participates in [#tidytuesday](https://twitter.com/search?q=tidytuesday), and attends useR meetups.
+His work currently includes cleaning data in R and developing Power BI dashboards for the many great teams at BYU Pathway Worldwide. In his free time, he learns statistics, participates in [#tidytuesday](https://twitter.com/search?q=tidytuesday), and attends useR meetups.

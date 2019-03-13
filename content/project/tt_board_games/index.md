@@ -6,7 +6,7 @@ title = "Board Game Mechanics"
 date = 2019-03-12
 
 # Project summary to display on homepage.
-summary = ""
+summary = "Code walk through"
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["royalties", "pcr"]`
@@ -44,9 +44,10 @@ url_code = "https://github.com/dallinwebb/tidy_tuesday/blob/master/2019/11_board
   focal_point = "Smart"
 +++
 
-# Data Exploration Workflow
+# Code walk through
 
-Load in the usual packages, and ggthemes so I can use the fivethrityeight ggplot2 theme.
+Load in the usual packages, and ggthemes so I can use the fivethirtyeight ggplot2 theme.
+
 
 ```r
 library(tidyverse)
@@ -168,7 +169,7 @@ board_games %>% select(mechanic)
 
 <br>
 
-It looks like a board game can have multiple mechanic categories as we see here seperated by commas. What I need to do to analyze this type of data is force each row to have just one category while maintaining some contextual information. In this case I just want to keep a hold of the `year` column. Before we start, I'm just curious, what game had the most combinations of game mechanics?
+It looks like a board game can have multiple mechanic categories as we see here separated by commas. What I need to do to analyze this type of data is force each row to have just one category while maintaining some contextual information. In this case I just want to keep a hold of the `year` column. Before we start, I'm just curious, what game had the most combinations of game mechanics?
 
 
 ```r
@@ -197,9 +198,9 @@ board_games %>%
 
 <br>
 
-Hmm, 504, I'm not familier with it. Looks like settlers of catan after with a cash system after looking [here](https://boardgamegeek.com/image/2703890/504). Probably very complicated.
+Hmm, 504, I'm not familiar with it. Looks like settlers of catan after with a cash system after looking [here](https://boardgamegeek.com/image/2703890/504). Probably very complicated.
 
-Now on to the data manipulation. I'll use `strsplit()` in a `mutate()` to serparate the categories and puts each of them into a nested tibble.
+Now on to the data manipulation. I'll use `tidyr::separate_rows()` to separate the categories and puts each of them into their own row.
 
 
 ```r
@@ -207,37 +208,7 @@ mechanics_count <-
   board_games %>% 
   select(year_published, mechanic) %>% 
   drop_na(mechanic) %>% 
-  mutate(mechanic = strsplit(mechanic, ","))
-
-mechanics_count
-```
-
-```
-## # A tibble: 9,582 x 2
-##    year_published mechanic 
-##             <dbl> <list>   
-##  1           1986 <chr [5]>
-##  2           1981 <chr [1]>
-##  3           1998 <chr [4]>
-##  4           1992 <chr [4]>
-##  5           1964 <chr [3]>
-##  6           1989 <chr [1]>
-##  7           1978 <chr [4]>
-##  8           1993 <chr [1]>
-##  9           1998 <chr [2]>
-## 10           1998 <chr [4]>
-## # ... with 9,572 more rows
-```
-
-<br>
-
-To make this nested data useful, we simply use `unnest()`
-
-
-```r
-mechanics_count <- 
-  mechanics_count %>% 
-  unnest()
+  separate_rows(mechanic, sep = ",")
 
 mechanics_count
 ```
@@ -259,9 +230,9 @@ mechanics_count
 ## # ... with 23,940 more rows
 ```
 
-<br>
-
 Now we have all the game mechanics used with their corresponding year. Notice we went from 9.5K rows to 23.9K which is expected.
+
+<br>
 
 
 ```r
@@ -276,9 +247,7 @@ mechanics_count %>%
 ## [1] 51
 ```
 
-<br>
-
-Before we get into plotting, I need to find the top 6 most occuring game mechanics. Having a total of 51 different game mechanics would make my plot hard to understand so let's keep it simple. 
+Before we get into plotting, I need to find the top 6 most occurring game mechanics. Having a total of 51 different game mechanics would make my plot hard to understand so let's keep it simple. 
 
 
 ```r
@@ -299,7 +268,7 @@ top_mechanics
 
 <br>
 
-Perfet, now lets plot them using a faceted density plot.
+Perfect, now lets plot them using a faceted density plot.
 
 
 ```r
@@ -311,13 +280,13 @@ mechanics_count %>%
   facet_wrap(~mechanic, ncol = 3) +
   scale_x_continuous(breaks = seq(1960, 2010, 10)) +
   scale_fill_tableau() +
-  labs(title = "Most Occuring Board Game Mechanics over the years") +
+  labs(title = "Most Occurring Board Game Mechanics over the years") +
   theme_fivethirtyeight() +
   theme(axis.text.y = element_blank(),
         axis.text.x = element_text(angle = 90))
 ```
 
-<img src="/project/tt_board_games/board_game_mechanics_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="/project/tt_board_games/board_game_mechanics_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 All but one game mechanic seem to have rising in popularity rather quickly over the past two decades, while the Hex-and-Counter method has maintained a good share for for almost 40 years!
 

@@ -73,5 +73,5 @@ date_format = "Jan 2006"
   * Assisted faculty in building a data pipeline and dashboard framework to enable data driven insights
   * Developed Power BI dashboards while collaborating with stakeholders to uncover actionable insights
   * Analyzed Facebook page data showing effects of business decisions on certain social media metrics
-  * Embeded R scripts utilizing the qualtRics and tidyverse packages into Power BI reports to enable automated data refresh"""
+  * Embedded  R scripts utilizing the qualtRics and tidyverse packages into Power BI reports to enable automated data refresh"""
 +++
