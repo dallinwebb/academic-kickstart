@@ -1,0 +1,156 @@
+---
+title: "Board Games"
+date: "2019-03-12"
+output:
+  html_document:  
+    keep_md: true
+    fig_height: 6
+    fig_width: 12
+    fig_align: 'center'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data Exploration Workflow
+
+Load in the usual packages, and ggthemes so I can use the fivethrityeight ggplot2 theme.
+```{r message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(ggthemes)
+
+board_games <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-03-12/board_games.csv")
+```
+
+<br>
+
+Let's get a look at the data.
+
+```{r}
+glimpse(board_games)
+```
+
+<br>
+
+First off, I want to see the cumulative board game total count over the years.
+
+```{r}
+cumulative <- 
+  board_games %>% 
+  count(year_published) %>% 
+  mutate(cumulative = cumsum(n))
+
+cumulative
+```
+
+```{r}
+cumulative %>% 
+  ggplot(aes(year_published, cumulative)) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1950, 2020, 10)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Year",
+       y = "Cumulative No. of Board Games") +
+  theme_fivethirtyeight()
+```
+
+<br>
+
+The number of board games picked up in the 70s and really got going exponential after 2000.
+
+I want to do the same thing, but look at how the use of different game mechanics has changed over the years. A game mechanic is how a game is played like rolling dice, drawing, or storytelling. Let's take a look at the `mechanic` column.
+
+```{r}
+board_games %>% select(mechanic)
+```
+
+<br>
+
+It looks like a board game can have multiple mechanic categories as we see here seperated by commas. What I need to do to analyze this type of data is force each row to have just one category while maintaining some contextual information. In this case I just want to keep a hold of the `year` column. Before we start, I'm just curious, what game had the most combinations of game mechanics?
+
+```{r}
+board_games %>% 
+  select(year_published, name, mechanic) %>% 
+  mutate(m_count = str_count(mechanic, ",")) %>%
+  arrange(desc(m_count))
+```
+
+<br>
+
+Hmm, 504, I'm not familier with it. Looks like settlers of catan after with a cash system after looking [here](https://boardgamegeek.com/image/2703890/504). Probably very complicated.
+
+Now on to the data manipulation. I'll use `strsplit()` in a `mutate()` to serparate the categories and puts each of them into a nested tibble.
+
+```{r}
+mechanics_count <- 
+  board_games %>% 
+  select(year_published, mechanic) %>% 
+  drop_na(mechanic) %>% 
+  mutate(mechanic = strsplit(mechanic, ","))
+
+mechanics_count
+```
+
+<br>
+
+To make this nested data useful, we simply use `unnest()`
+
+```{r}
+mechanics_count <- 
+  mechanics_count %>% 
+  unnest()
+
+mechanics_count
+```
+
+<br>
+
+Now we have all the game mechanics used with their corresponding year. Notice we went from 9.5K rows to 23.9K which is expected.
+
+```{r}
+mechanics_count %>%
+  select(mechanic) %>% 
+  unique() %>%
+  drop_na(mechanic) %>%
+  nrow()
+```
+
+<br>
+
+Before we get into plotting, I need to find the top 6 most occuring game mechanics. Having a total of 51 different game mechanics would make my plot hard to understand so let's keep it simple. 
+
+```{r}
+top_mechanics <- 
+  mechanics_count %>% 
+  count(mechanic, sort = T) %>% 
+  top_n(n = 6, wt = n) %>% 
+  pull(mechanic)
+
+top_mechanics
+```
+
+<br>
+
+Perfet, now lets plot them using a faceted density plot.
+
+```{r}
+mechanics_count %>% 
+  filter(mechanic %in% top_mechanics) %>% 
+  mutate(mechanic = factor(mechanic, levels = top_mechanics)) %>% 
+  ggplot(aes(year_published, fill = mechanic)) +
+  geom_density(col = "grey90", show.legend = F) +
+  facet_wrap(~mechanic, ncol = 3) +
+  scale_x_continuous(breaks = seq(1960, 2010, 10)) +
+  scale_fill_tableau() +
+  labs(title = "Most Occuring Board Game Mechanics over the years") +
+  theme_fivethirtyeight() +
+  theme(axis.text.y = element_blank(),
+        axis.text.x = element_text(angle = 90))
+```
+
+All but one game mechanic seem to have rising in popularity rather quickly over the past two decades, while the Hex-and-Counter method has maintained a good share for for almost 40 years!
+
+<br>

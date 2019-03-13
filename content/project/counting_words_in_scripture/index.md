@@ -10,7 +10,7 @@ summary = ""
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["royalties", "pcr"]`
-tags = ["Data Wrangling and Visualization Course", "Text Mining"]
+tags = ["Data Wrangling and Visualization Course", "Text Mining", "Featured"]
 
 # Optional external URL for project (replaces project detail page).
 external_link = ""
@@ -37,7 +37,7 @@ url_code = ""
 # To use, add an image named `featured.jpg/png` to your project's folder. 
 [image]
   # Caption (optional)
-  caption = "test image"
+  caption = ""
   
   # Focal point (optional)
   # Options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight

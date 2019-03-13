@@ -37,7 +37,7 @@ url_code = "https://github.com/dallinwebb/tidy_tuesday/blob/master/2018/Week_21/
 # To use, add an image named `featured.jpg/png` to your project's folder. 
 [image]
   # Caption (optional)
-  caption = "test image"
+  caption = ""
   
   # Focal point (optional)
   # Options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight

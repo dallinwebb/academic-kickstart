@@ -30,7 +30,7 @@ flip_alt_rows = false
 # Filter toolbar.
 
 # Default filter index (e.g. 0 corresponds to the first `[[filter]]` instance below).
-filter_default = 2
+filter_default = 1
 
 # Add or remove as many filters (`[[filter]]` instances) as you like.
 # To show all items, set `tag` to "*".
@@ -39,6 +39,10 @@ filter_default = 2
 [[filter]]
   name = "All"
   tag = "*"
+  
+[[filter]]
+  name = "Featured"
+  tag = "Featured"
 
 [[filter]]
   name = "Data Wrangling & Visualization Course"

@@ -10,7 +10,7 @@ summary = "Startup's on BYU-Idaho campus"
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["royalties", "pcr"]`
-tags = ["Business Finance", "Data Wrangling and Visualization Course"]
+tags = ["Business Finance", "Data Wrangling and Visualization Course", "Featured"]
 
 # Optional external URL for project (replaces project detail page).
 external_link = ""
